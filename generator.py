@@ -23,7 +23,7 @@ def next_mode(current, inpt):
         return (INCL, NO_CONSUME)
     return (MACRO, NO_CONSUME)
 
-def gen_for_file(name, in_file, incls: list[str], lines: list[str]):
+def gen_for_file(name, in_file, incls: set[str], lines: list[str]):
     mode = PLAIN
     wtd = NO_CONSUME
     for line in in_file:
@@ -34,7 +34,7 @@ def gen_for_file(name, in_file, incls: list[str], lines: list[str]):
         if (mode == INCL):
             #print("KUKU # INCL")
             if wtd == NO_CONSUME:
-                incls.append(line_)
+                incls.add(line_)
         if (mode == PLAIN):
             #print("KUKU # PLAIN")
             if wtd == NO_CONSUME:
@@ -52,7 +52,7 @@ out = open("./out/kcj_gda.h", "w")
 
 out.write("#ifndef __KCJ_GDS_H__\n")
 
-incls = []
+incls = set()
 lines = []
 with os.scandir("./raw") as entries:
     for entry in entries:
