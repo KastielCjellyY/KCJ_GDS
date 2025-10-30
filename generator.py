@@ -52,7 +52,7 @@ out = open("./out/kcj_gda.h", "w")
 
 out.write("#ifndef __KCJ_GDS_H__\n")
 
-incls = set()
+incls = set[str]()
 lines = []
 with os.scandir("./raw") as entries:
     for entry in entries:
